@@ -28,8 +28,13 @@ namespace AsyncModals.Controllers
         [HttpPost]
         public IActionResult Edit(Sheep sheep)
         {
-            Sheep.UpdateASheep(sheep);
-            return Ok();
+            //Sheep.UpdateASheep(sheep);
+            //return Ok();
+            return RedirectResult("Index");
+        }
+        public IActionResult RedirectResult(string action, string controller = null, object values = null)
+        {
+            return BadRequest($"document.location = '{Url.Action(action, controller, values)}';");
         }
 
         public IActionResult Privacy()
