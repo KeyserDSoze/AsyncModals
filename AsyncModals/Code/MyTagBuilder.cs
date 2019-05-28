@@ -29,8 +29,14 @@ namespace AsyncModals
             else
                 this.Attributes[key] = value;
         }
+        public void MergeAttributes(object htmlAttributes)
+        {
+            if (htmlAttributes == null) return;
+            this.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+        }
         public void MergeAttributes(RouteValueDictionary dictionary)
         {
+            if (dictionary == null) return;
             foreach (string key in dictionary.Keys)
                 if (!this.Attributes.ContainsKey(key))
                     this.Attributes.Add(key, dictionary.GetValueOrDefault(key).ToString());
