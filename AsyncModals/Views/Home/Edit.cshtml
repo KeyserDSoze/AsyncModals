@@ -3,7 +3,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<form asp-controller="Home" asp-action="Edit" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess">
+<form asp-controller="Home" asp-action="Edit" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
     <div class="form-horizontal">
         <div class="panel-body">
             @*<div class="@CssClasses.FORM_GROUP">
@@ -108,7 +108,7 @@
                 });
             }
         },
-        onSucces: function (context) {
+        onSuccess: function (context) {
             if (ajaxHelper.targetUpdate.length > 0)
                 $(ajaxHelper.targetUpdate).html(context);
             console.log(ajaxHelper.targetUpdate);
@@ -116,7 +116,7 @@
             ajaxHelper.contextUpdate = "";
             ajaxHelper.target = "";
         },
-        onFailed: function (context) {
+        onFailure: function (context) {
             if (ajaxHelper.targetUpdate.length > 0)
                 alert(context);
         }
@@ -128,9 +128,12 @@
     });
     var onSuccess = function (context) {
         console.log(context);
-        ajaxHelper.onSucces(context);
+        ajaxHelper.onSuccess(context);
     };
-    var onFailure = function (context) {
+    var onFailure = function (event, context, request) {
+        console.log(context);
+        console.log(event);
+        console.log(request);
         ajaxHelper.onFailure(context);
     };
 </script>

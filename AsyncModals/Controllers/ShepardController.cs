@@ -32,7 +32,7 @@ namespace AsyncModals.Controllers
                 Sheep.UpdateASheep(sheep);
                 return PartialView("../Home/_ListShepard", sheep.Shepards);
             }
-            return BadRequest();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
