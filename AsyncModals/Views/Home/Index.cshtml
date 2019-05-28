@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Sheep>
+
+<div id="page-content">
+
+    <div class="panel panel-warning panel-bordered">
+        <div class="panel-heading">
+            <div class="panel-title pull-left col-xs-10">Title</div>
+            <a asp-action="Create" asp-controller="Home" class="btn btn-purple add-tooltip pull-right" title="CreateNew">
+                Create New
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table myFootable">
+                    <thead>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Cost)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Sheep sheep in Model)
+                        {
+                            <tr class="linkable-row" onclick="location.href = '@(Url.Action("Edit", "Home", new { id = sheep.Id }))'">
+                                <td>
+                                    <a asp-action="Edit" asp-controller="Home" asp-route-Id="@sheep.Id">@sheep.Name</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => sheep.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => sheep.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => sheep.Cost)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

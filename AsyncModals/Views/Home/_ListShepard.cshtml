@@ -1,0 +1,6 @@
+﻿@model List<Shepard>
+
+@foreach (Shepard shepard in Model)
+{
+    @Html.AjaxModal(shepard.Name, Url.Action("Update", "Shepard"), htmlTag: "div", model: shepard, updateId: "#modalupdate")
+}

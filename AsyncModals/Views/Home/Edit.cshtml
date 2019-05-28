@@ -1,0 +1,137 @@
+﻿@model Sheep
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form asp-controller="Home" asp-action="Edit" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess">
+    <div class="form-horizontal">
+        <div class="panel-body">
+            @*<div class="@CssClasses.FORM_GROUP">
+                <label asp-for="CarrierId" class="control-label col-md-2"></label>
+                <div class="col-md-9">
+                    @{
+                    @await Component.InvokeAsync("CarrierListForCarrierIntegration", Model.CarrierId)
+                    }
+                </div>
+                <span asp-validation-for="CarrierId" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+                <label asp-for="Id" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Id" type="text" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Cost" type="text" class="form-control" required />
+                    <span asp-validation-for="Cost" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Shepards" class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <div id="modalupdate">
+                        <partial name="_ListShepard" model="Model.Shepards" />
+                    </div>
+                    @Html.AjaxModal("New Shepard", Url.Action("Create", "Shepard", new { id = Model.Id }), updateId: "#modalupdate", htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" data-ajax-method="GET" data-url="@Url.Action(" Create", "Shepard" , new { id=Model.Id})">
+                        Add Shepard
+                    </button>*@
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <div asp-validation-summary="All" class="" text-danger"></div>
+            <input type="submit" value="Save Sheep" class="btn btn-success pull-right" />
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="Normalmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ajaxHelper =
+    {
+        targetUpdate: "",
+        target: "",
+        onclick: function (event, handler) {
+            var url = $(handler).data('url');
+            var model = $(handler).data('model');
+            ajaxHelper.target = $(handler).data('target');
+            var ajaxMethod = $(handler).data('ajax-method');
+            ajaxHelper.targetUpdate = $(handler).data('update');
+            $(ajaxHelper.target).on("hide.bs.modal", function () {
+                ajaxHelper.contextUpdate = "";
+                ajaxHelper.target = "";
+            });
+            if (ajaxMethod && ajaxMethod.toLowerCase() == "post") {
+                $.post(url, model).done(function (data) {
+                    $(ajaxHelper.target + ' .modal-body').html(data);
+                    $(ajaxHelper.target + ' > .modal').modal('show');
+                });
+            }
+            else {
+                $.get(url).done(function (data) {
+                    $(ajaxHelper.target + ' .modal-body').html(data);
+                    $(ajaxHelper.target + ' > .modal').modal('show');
+                });
+            }
+        },
+        onSucces: function (context) {
+            if (ajaxHelper.targetUpdate.length > 0)
+                $(ajaxHelper.targetUpdate).html(context);
+            console.log(ajaxHelper.targetUpdate);
+            $(ajaxHelper.target).modal('hide');
+            ajaxHelper.contextUpdate = "";
+            ajaxHelper.target = "";
+        },
+        onFailed: function (context) {
+            if (ajaxHelper.targetUpdate.length > 0)
+                alert(context);
+        }
+    }
+    $(function () {
+        $('[data-toggle="modal"]').click(function (event) {
+            ajaxHelper.onclick(event, this);
+        });
+    });
+    var onSuccess = function (context) {
+        console.log(context);
+        ajaxHelper.onSucces(context);
+    };
+    var onFailure = function (context) {
+        ajaxHelper.onFailure(context);
+    };
+</script>
+
