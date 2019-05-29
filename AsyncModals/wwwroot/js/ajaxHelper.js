@@ -12,7 +12,7 @@
         var ajaxMethod = $(handler).data('ajax-method');
         var title = $(handler).data('title');
         if (title)
-            $(ajaxHelper.target + ' .modal-title').html(data);
+            $(ajaxHelper.target + ' .modal-title').html(title);
         ajaxHelper.targetUpdate = $(handler).data('update');
         $(ajaxHelper.target).on("hide.bs.modal", function () {
             ajaxHelper.contextUpdate = "";
@@ -22,7 +22,7 @@
             type: ajaxMethod,
             url: url,
             data: model,
-            onSucces: function (data) {
+            success: function (data) {
                 $(ajaxHelper.target + ' .modal-body').html(data);
                 $(ajaxHelper.target + ' > .modal').modal('show');
             }
