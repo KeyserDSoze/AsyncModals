@@ -49,11 +49,11 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <div class="modal fade" id="Normalmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="Normalmodal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title">{title}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -61,10 +61,26 @@
                     <div class="modal-body">
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="genericAlert">
+            <button class="close" data-dismiss="alert"><span>&times;</span></button>
+            <div id="genericAlertContainer"></div>
+        </div>
+        
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                        <div class="bootbox-body text-2x text-center">Sure to delete</div>
                     </div>
+                    <div class="modal-footer">
+                        <button  data-bb-handler="cancel" onclick="ajaxHelper.closeConfirm();" type="button" class="btn btn-default" title="Cancel"><i class="fa fa-thumbs-down"></i></button>
+                        <button id="confirmDelete" data-bb-handler="confirm" type="button" class="btn btn-primary" title="Delete"><i class="fa fa-thumbs-up"></i></button>
+                    </div>
+                    <img class="ajax-spinner" src="../../images/30.gif" />
                 </div>
             </div>
         </div>

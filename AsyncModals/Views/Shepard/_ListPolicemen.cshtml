@@ -1,0 +1,7 @@
+﻿@model List<Policeman>
+
+@foreach (Policeman policeman in Model)
+{
+    @Html.AjaxModal(policeman.Name, Url.Action("Update", "Policeman"), htmlTag: "div", model: policeman, updateId: "policemanupdate")
+    <div onclick="ajaxHelper.onConfirm('@Url.Action("Delete", "Policeman", new { id = policeman.Name })', null, 'policemanupdate')" class="mar-lft substitute btn btn-danger add-tooltip pull-right" title="Delete"><i class='fa fa-trash'></i></div>
+}

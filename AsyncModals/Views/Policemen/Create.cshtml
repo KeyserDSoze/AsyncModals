@@ -1,9 +1,9 @@
-﻿@model Shepard
+﻿@model Policeman
 @{
     Layout = null;
 }
 
-<form asp-controller="Shepard" asp-action="Modify" asp-route-id="@ViewBag.SheepId" onsubmit="ajaxHelper.onSubmit(this, event)">
+<form asp-controller="Policemen" asp-action="Modify" asp-route-id="@ViewBag.ShepardId" onsubmit="ajaxHelper.onSubmit(this, event)">
     <div class="form-horizontal">
         <div class="panel-body">
 
@@ -14,14 +14,11 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
-            <div id="policemenupdate">
-                <partial name="_ListPolicemen" model="Model.Policemen" />
-            </div>
-            @Html.AjaxModal("New Policeman", Url.Action("Create", "Policemen", new { id = Model.Name }), updateId: "policemanupdate", htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+            
         </div>
         <div class="panel-footer">
             <div asp-validation-summary="All" class="" text-danger"></div>
-            <input type="submit" value="Save Shepard" class="btn btn-success pull-right" />
+            <input type="submit" value="Save Policeman" class="btn btn-success pull-right" />
         </div>
     </div>
 </form>

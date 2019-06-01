@@ -37,7 +37,7 @@
                     <div id="modalupdate">
                         <partial name="_ListShepard" model="Model.Shepards" />
                     </div>
-                    @Html.AjaxModal("New Shepard", Url.Action("Create", "Shepard", new { id = Model.Id }), updateId: "#modalupdate", htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+                    @Html.AjaxModal("New Shepard", Url.Action("Create", "Shepard", new { id = Model.Id }), updateId: "modalupdate", htmlAttributes: new { @class = "btn btn-primary", type = "button" })
                     @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" data-ajax-method="GET" data-url="@Url.Action(" Create", "Shepard" , new { id=Model.Id})">
                             Add Shepard
                         </button>*@

@@ -2,5 +2,6 @@
 
 @foreach (Shepard shepard in Model)
 {
-    @Html.AjaxModal(shepard.Name, Url.Action("Update", "Shepard"), htmlTag: "div", model: shepard, updateId: "#modalupdate")
+    @Html.AjaxModal(shepard.Name, Url.Action("Update", "Shepard"), htmlTag: "div", model: shepard, updateId: "modalupdate")
+    <div onclick="ajaxHelper.onConfirm('@Url.Action("Delete", "Shepard", new { id = shepard.Name })', null, 'modalupdate')" class="mar-lft substitute btn btn-danger add-tooltip pull-right" title="Delete"><i class='fa fa-trash'></i></div>
 }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace AsyncModals.Models
 {
-    public class Shepard
+    public class Policeman
     {
         public string Name { get; set; }
-        public List<Policeman> Policemen { get; set; } = new List<Policeman>();
     }
 }

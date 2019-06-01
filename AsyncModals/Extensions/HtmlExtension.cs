@@ -31,7 +31,7 @@ namespace AsyncModals.Extensions
             if (htmlAttributes != null)
                 myTagBuilder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
             myTagBuilder.MergeAttribute("data-toggle", "modal");
-            myTagBuilder.MergeAttribute("data-target", $"#{modalType}modal");
+            myTagBuilder.MergeAttribute("data-target", $"{modalType}modal");
             myTagBuilder.MergeAttribute("data-ajax-method", method);
             myTagBuilder.MergeAttribute("data-url", url);
             myTagBuilder.MergeAttribute("onclick", "ajaxHelper.onclick(event, this)");

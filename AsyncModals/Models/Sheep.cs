@@ -57,5 +57,15 @@ namespace AsyncModals.Models
                             return (kvp.Value, shepard);
             return (null, null);
         }
+        public static (Sheep, Shepard, Policeman) FindAPoliceman(string policemanName)
+        {
+            if (!string.IsNullOrWhiteSpace(policemanName))
+                foreach (KeyValuePair<int, Sheep> kvp in Sheeps)
+                    foreach (Shepard shepard in kvp.Value.Shepards)
+                        foreach(Policeman policeman in shepard.Policemen)
+                        if (policeman.Name == policemanName)
+                            return (kvp.Value, shepard, policeman);
+            return (null, null, null);
+        }
     }
 }

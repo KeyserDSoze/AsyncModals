@@ -1,0 +1,45 @@
+﻿@model dynamic
+@using AsyncModals.Code;
+@{
+    List<ModelBinder> binders = ModelBinder.Instance(Model);
+ }
+<div id="page-content">
+    <div class="panel panel-warning panel-bordered">
+        <div class="panel-heading">
+            <div class="panel-title pull-left col-xs-10">Title</div>
+            <a asp-action="Create" asp-controller="Home" class="btn btn-purple add-tooltip pull-right" title="CreateNew">
+                Create New
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table myFootable">
+                    <thead>
+                        <tr>
+                            @foreach (ModelBinder binding in binders)
+                            {
+                                <th>
+                                    <label>@binding.DisplayName</label>
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (dynamic value in Model)
+                        {
+                            <tr class="linkable-row" onclick="location.href = '@(Url.Action("Edit", "Home", new { id = value.Id }))'">
+                                @foreach (ModelBinder binding in binders)
+                                {
+                                    <td>
+                                        <label>@binding.GetValue(value)</label>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

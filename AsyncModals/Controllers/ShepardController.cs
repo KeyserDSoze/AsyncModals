@@ -29,10 +29,22 @@ namespace AsyncModals.Controllers
             if (sheep != null)
             {
                 sheep.Shepards.Add(shepard);
-                Sheep.UpdateASheep(sheep);
+                //Sheep.UpdateASheep(sheep);
                 return PartialView("../Home/_ListShepard", sheep.Shepards);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectResult("Index", "Home");
         }
+        public IActionResult Delete(string id)
+        {
+            (Sheep sheep, Shepard shepard) = Sheep.FindAShepard(id);
+            if (sheep != null)
+            {
+                sheep.Shepards.Remove(shepard);
+                //Sheep.UpdateASheep(sheep);
+                return PartialView("../Home/_ListShepard", sheep.Shepards);
+            }
+            return RedirectResult("Index", "Home");
+        }
+        public IActionResult RedirectResult(string action, string controller = null, object values = null) => BadRequest($"document.location = '{Url.Action(action, controller, values)}';");
     }
 }
