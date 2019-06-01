@@ -37,7 +37,7 @@
         var modalHtml = ajaxHelper.normalModal.replace("{modalid}", target).replace("{zindex}", ajaxHelper.zindexcreated++).replace("{targetupdate}", targetUpdate).replace("{title}", title);
         $("body").append(modalHtml);
         $("#" + target).on("hide.bs.modal", function () {
-            $("#" + target).remove();
+            window.setTimeout(function () { $("#" + target).remove(); }, 2000);
         });
         $('#loader').show();
         $.ajax({
